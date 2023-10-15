@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Survey Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        fieldset{
+            background-color:rgb(249, 249, 249)
+        }
+        *{
+            background-color:white
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <fieldset style="height: 100%;width: 97%;">
+        <legend>Survey Form</legend>
+        
+    <div class="container">
+        <form id="surveyForm">
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <select id="country" required>
+                    <option value="Afg">Afghanistan</option>
+                    <option value="bang">Bangladesh</option>
+                    <option value="chi">China</option>
+                    <option value="Den">Denmark</option>
+                    <option value="Egy">Egypt</option>
+                    <option value="Fin">Finland</option>
+                    <option value="Ger">Germany</option>
+                    <option value="Ind">India</option>
+                    <option value="USA">United States</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="Canada">Canada</option>
+                
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Gender:</label>
+                <input type="checkbox" id="male" name="gender"> Male
+                <input type="checkbox" id="female" name="gender"> Female
+            </div>
+            <div class="form-group">
+                <label for="profession">Profession:</label>
+                <input type="text" id="profession" required placeholder="Eg Associate Eng...">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required placeholder="Eg abcd@gmail.com">
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile Number:</label>
+                <input type="number" id="mobile" required placeholder="Eg 1234">
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="submitForm()">Submit</button>
+                <button type="button" onclick="resetForm()">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="popup" style="display: none; text-align: center;">
+        <h2>Survey Form Data</h2>
+        <div id="popupContent"></div>
+        <button onclick="closePopup()">Close</button>
+    </div>
+</fieldset>
+
+    <script>
+        function submitForm() {
+            // Gather form data
+            const formData = {
+                firstName: document.getElementById("firstName").value,
+                lastName: document.getElementById("lastName").value,
+                dob: document.getElementById("dob").value,
+                country: document.getElementById("country").value,
+                gender: document.querySelectorAll('input[name="gender"]:checked').length > 0 ? "Male" : "Female",
+                profession: document.getElementById("profession").value,
+                email: document.getElementById("email").value,
+                mobile: document.getElementById("mobile").value
+            };
+
+            // Display data in the popup
+            const popupContent = document.getElementById("popupContent");
+            popupContent.innerHTML = "";
+            for (const key in formData) {
+                popupContent.innerHTML += `<p><strong>${key}:</strong> ${formData[key]}</p>`;
+            }
+
+            // Show the popup
+            document.getElementById("popup").style.display = "block";
+
+            // Reset the form
+            document.getElementById("surveyForm").reset();
+        }
+
+        function resetForm() {
+            document.getElementById("surveyForm").reset();
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
+    </form>
+</body>
+</html>
